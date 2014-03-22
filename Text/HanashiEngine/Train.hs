@@ -5,7 +5,7 @@ module Text.HanashiEngine.Train
 --import Text.HanashiEngine.IO as HIO
 import Data.Map as Map
 import Data.List as List
-type TrigramModel = Map String (Map String (Map String Int))
+import Text.HanashiEngine.Types
 
 makeTrigramFreqList :: [String] -> [([String], Int)]
 makeTrigramFreqList strings = getTrigramFrequency $ makeTrigramList strings
