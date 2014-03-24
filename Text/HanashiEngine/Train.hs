@@ -1,5 +1,6 @@
 module Text.HanashiEngine.Train
 ( makeTrigramList
+, makeTrigramModel
 )where
 --import Text.HanashiEngine.MeCabTools as MecabTools
 --import Text.HanashiEngine.IO as HIO
