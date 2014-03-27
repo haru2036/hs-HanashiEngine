@@ -2,8 +2,7 @@ module Text.HanashiEngine.Train
 ( makeTrigramList
 , makeTrigramModel
 )where
---import Text.HanashiEngine.MeCabTools as MecabTools
---import Text.HanashiEngine.IO as HIO
+
 import Data.Map as Map
 import Data.List as List
 import Text.HanashiEngine.Types
@@ -19,7 +18,7 @@ makeTrigramItem :: ([String], Int) -> TrigramModel
 makeTrigramItem ([a, b, c], count) = singleton a (singleton b (singleton c count))
 
 makeTrigramList :: [String] -> [[String]]
-makeTrigramList listAll@[a, b, c] = [listAll]
+makeTrigramList [a, b, c] = [[a, b, c]]
 makeTrigramList listAll = (take 3 listAll) : (makeTrigramList (tail listAll))
 
 searchAndCountWords :: [String] -> [[String]] -> Int
