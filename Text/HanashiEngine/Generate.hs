@@ -25,18 +25,18 @@ calcRandomPosition :: Int -> Double -> Double
 calcRandomPosition lengthSum randomValue = (1.0 / (fromIntegral lengthSum)) * randomValue
 
 lookupWordOfRandomPosition :: [(String, Int)] -> Int -> String
-lookupWordOfRandomPosition modelHead sum = lookupWordOfRandomPositionRec modelHead sum 0
+lookupWordOfRandomPosition modelHead listSum = lookupWordOfRandomPositionRec modelHead listSum 0
 
 lookupWordOfRandomPositionRec :: [(String, Int)] -> Int -> Int -> String
-lookupWordOfRandomPositionRec modelHead sum position 
-  | sum < position = lookupWordOfRandomPositionRec (drop 1 modelHead) (sum + (snd (head modelHead))) position
-  | sum >= position = fst (head modelHead)
+lookupWordOfRandomPositionRec modelHead listSum position 
+  | listSum < position = lookupWordOfRandomPositionRec (drop 1 modelHead) (listSum + (snd (head modelHead))) position
+  | listSum >= position = fst (head modelHead)
 
 makeBigram :: TrigramModel -> String -> Double -> [String]
 makeBigram model startWord randomValue = let 
-                                          keysList = keys $ Map.lookup startWord model 
+                                          keysList = maybe (["\n"]) (\x->keys x) $ Map.lookup startWord model 
                                          in 
-                                           (truncate (calcRandomPosition (length keysList))) !! keysList
+                                          startWord : (keysList !! (truncate (calcRandomPosition (length keysList) randomValue))) :[]
 
 makeInfiniteRandoms :: IO [Double]
 makeInfiniteRandoms = do
